@@ -24,10 +24,11 @@ classifiers=[
 {%- endif %}
     'Natural Language :: English',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
     'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
 ]
 packages = [
     { include = "{{ cookiecutter.pkg_name }}" },
@@ -35,57 +36,34 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6.2,<4.0"
+python = ">=3.8,<4.0"
 {%- if cookiecutter.command_line_interface|lower == 'click' %}
 click = "8.0.1"
 {%- endif %}
 
-black  = { version = "^21.5b2", optional = true}
-isort  = { version = "^5.8.0", optional = true}
-flake8  = { version = "^3.9.2", optional = true}
-flake8-docstrings = { version = "^1.6.0", optional = true }
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+isort = "^5.12.0"
+flake8-docstrings = "^1.7.0"
 {%- if cookiecutter.use_mypy == 'y' %}
-mypy = {version = "^0.900", optional = true}
+mypy = "^1.5.1"
 {%- endif %}
-pytest  = { version = "^6.2.4", optional = true}
-pytest-cov  = { version = "^2.12.0", optional = true}
-tox  = { version = "^3.20.1", optional = true}
-virtualenv  = { version = "^20.2.2", optional = true}
-pip  = { version = "^20.3.1", optional = true}
-mkdocs  = { version = "^1.1.2", optional = true}
-mkdocs-include-markdown-plugin  = { version = "^1.0.0", optional = true}
-mkdocs-material  = { version = "^6.1.7", optional = true}
-mkdocstrings  = { version = "^0.15.2", optional = true}
-mkdocs-material-extensions  = { version = "^1.0.1", optional = true}
-twine  = { version = "^3.3.0", optional = true}
-mkdocs-autorefs = {version = "^0.2.1", optional = true}
-pre-commit = {version = "^2.12.0", optional = true}
-toml = {version = "^0.10.2", optional = true}
-bump2version = {version = "^1.0.1", optional = true}
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+tox = "^4.11.3"
+virtualenv = "^20.24.5"
+pip = "^23.2.1"
+pre-commit = "^3.4.0"
+toml = "^0.10.2"
 
-[tool.poetry.extras]
-test = [
-    "pytest",
-    "black",
-    "isort",
-    {%- if cookiecutter.use_mypy == 'y' %}
-    "mypy",
-    {%- endif %}
-    "flake8",
-    "flake8-docstrings",
-    "pytest-cov"
-    ]
-
-dev = ["tox", "pre-commit", "virtualenv", "pip", "twine", "toml", "bump2version"]
-
-doc = [
-    "mkdocs",
-    "mkdocs-include-markdown-plugin",
-    "mkdocs-material",
-    "mkdocstrings",
-    "mkdocs-material-extension",
-    "mkdocs-autorefs"
-    ]
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.5.3"
+mkdocs-include-markdown-plugin = "^1.0.0"
+mkdocs-material = "^9.4.3"
+mkdocs-material-extensions = "^1.2"
+mkdocs-autorefs = "^0.5.0"
+mkdocstrings = { version = "^0.23.0", extras = ["python"] }
+mkdocs-macros-plugin = "^1.0.4"
 
 {% if cookiecutter.command_line_interface|lower == 'click' -%}
 [tool.poetry.scripts]
